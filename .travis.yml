@@ -1,8 +1,8 @@
 sudo: required
-  language: node_js
+language: node_js
 node_js:
   - 10
-cache: npm 
+cache: 
   directories:
     - node_modules
 
@@ -36,7 +36,7 @@ deploy:
     # push to dockerhub & heroku 
     docker push aabhusan/react-example:latest; 
     docker push registry.heroku.com/$HEROKU_APP_NAME/web; 
-    heroku container: release web --app $ HEROKU_APP_NAME
+    heroku container:release web --app $ HEROKU_APP_NAME
   on: 
     branch: master
 
