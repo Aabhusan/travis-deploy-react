@@ -22,7 +22,7 @@ deploy:
 deploy:
   provider: heroku
   api_key:
-    secure: $key
+    secure: key
   app: react-example-aabhusan
 
 
