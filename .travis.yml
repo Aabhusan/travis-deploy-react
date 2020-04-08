@@ -22,7 +22,7 @@ deploy:
 deploy:
   provider: heroku
   api_key:
-    secure: key
+    secure: key  #key is a env varibale passed from the travis repository settings
   app: react-example-aabhusan
 
 
