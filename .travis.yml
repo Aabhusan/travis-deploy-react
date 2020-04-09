@@ -34,13 +34,11 @@ script:
 
 deploy: 
   provider: script 
-  script: 
+   script: 
     # push to dockerhub & heroku 
-    docker push aabhusan/react-example:latest; 
-    docker push registry.heroku.com/"$HEROKU_APP_NAME"/web; 
-    heroku container:release web --app "$HEROKU_APP_NAME"
-  on: 
-    branch: master
+    - docker push aabhusan/react-example:latest; 
+    - docker push registry.heroku.com/"$HEROKU_APP_NAME"/web; 
+    - heroku container:release web --app "$HEROKU_APP_NAME"
 
 # before_install:
 #   - docker build -t react-example:latest .
