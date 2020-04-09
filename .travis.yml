@@ -26,8 +26,8 @@ script:
   - npm test 
   - npm build 
   # build docker images 
-  - docker build -t aabhusan/react-example:latest .
-  - docker tag aabhusan/react-example:latest  registry.heroku.com/"$HEROKU_APP_NAME"/web 
+  - docker build -t aabhusan/react-example:v1 .
+  - docker tag aabhusan/react-example:v1  registry.heroku.com/"$HEROKU_APP_NAME"/web 
 
   # - docker build -t unqpdes / todo-list-front .
   # - docker tag unqpdes / todo-list-front registry.heroku.com/$HEROKU_APP_NAME/web 
@@ -36,15 +36,17 @@ deploy:
   provider: script 
   script: 
     # push to dockerhub & heroku 
-    - docker push aabhusan/react-example:latest; 
+    - docker push aabhusan/react-example:v1; 
     - docker push registry.heroku.com/"$HEROKU_APP_NAME"/web; 
     - heroku container:release web --app "$HEROKU_APP_NAME"
-
+  on:
+    branch: master
+    
 # before_install:
 #   - docker build -t react-example:latest .
 #   - docker images 
 
-# deploy:
+# deploy: 
 #   provider: script
 #   script: bash docker_push
 #   on:
