@@ -13,10 +13,11 @@ before_install:
   # install heroku CLI 
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh 
   # login to docker registries (dockerhub + heroku) 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin 
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin 
   #- echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com 
+  - echo $HEROKU_PASSWORD | heroku login -i $HEROKU_USERNAME --password-stdin
   - heroku plugins:install @heroku-cli/plugin-container-registry
-  - heroku container:login
+  - heroku container:login  
   #- docker login --username=_ --password="$HEROKU_API_KEY" registry.heroku.com
 install: 
   # install deps 
@@ -27,7 +28,7 @@ script:
   - npm build 
   # build docker images 
   - docker build -t aabhusan/react-example:v1 .
-  - docker tag aabhusan/react-example:v1  registry.heroku.com/"$HEROKU_APP_NAME"/web 
+  - docker tag aabhusan/react-example:v1  registry.heroku.com/$HEROKU_APP_NAME/web 
 
   # - docker build -t unqpdes / todo-list-front .
   # - docker tag unqpdes / todo-list-front registry.heroku.com/$HEROKU_APP_NAME/web 
@@ -37,11 +38,10 @@ deploy:
   script: 
     # push to dockerhub & heroku 
     - docker push aabhusan/react-example:v1; 
-    - docker push registry.heroku.com/"$HEROKU_APP_NAME"/web; 
+    - docker push registry.heroku.com/$HEROKU_APP_NAME/web; 
     - heroku container:release web --app "$HEROKU_APP_NAME"
   on:
     branch: master
-    
 # before_install:
 #   - docker build -t react-example:latest .
 #   - docker images 
