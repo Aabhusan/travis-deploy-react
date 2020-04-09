@@ -36,8 +36,8 @@ deploy:
     # push to dockerhub & heroku 
      docker push aabhusan/react-example:v2;
      #docker push registry.heroku.com/$HEROKU_APP_NAME/web; 
-     heroku container:push web ;
-     heroku container:release web --app "$HEROKU_APP_NAME"
+     heroku container:push web;
+     heroku container:release web --app $HEROKU_APP_NAME
 
 # before_install:
 #   - docker build -t react-example:latest .
